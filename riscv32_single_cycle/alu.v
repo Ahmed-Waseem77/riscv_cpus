@@ -5,7 +5,7 @@ module alu(
    input   wire    [3:0]       alufn, 
    input   wire    [32 - 1:0]  b, 
    output  wire                cf, 
-   output  wire    [32- 1:0]   r, 
+   output  reg     [32- 1:0]   r, 
    input   wire    [32 - 1:0]  rs1, 
    output  wire                sf, 
    output  wire                vf, 
@@ -14,7 +14,7 @@ module alu(
 
 
 // Internal Declarations
-    wire [N-1:0] a; 
+    wire [32-1:0] a; 
     wire shamt; 
     assign shamt = Instruction;
     assign a = rs1;

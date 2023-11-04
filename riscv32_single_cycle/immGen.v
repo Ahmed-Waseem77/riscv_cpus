@@ -1,14 +1,12 @@
 `resetall
 `timescale 1ns/10ps
 module immGen( 
-   // Port Declarations
    input   wire    [32-1:0]    Instruction, 
    output  wire    [32 - 1:0]  immediate
 );
 
 
 // Internal Declarations
-
 wire [32-1:0] IR; 
 reg  [32-1:0] Imm;
 
