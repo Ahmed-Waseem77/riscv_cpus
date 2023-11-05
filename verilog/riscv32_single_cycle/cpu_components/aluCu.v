@@ -46,8 +46,16 @@ module aluCu(
 always @(*) begin : COMBINATIONAL_OUTPUT 
   case(alu_op) 
     2'b00 : alufn = 4'b0011; //NOP
-    2'b01 : alufn = 4'b0001; //SUB
-    2'b10 : alufn = 4'b0000; //ADD
+    2'b01 : alufn = 4'b0001; //SUB 
+    2'b10 : begin 
+              if (Instruction[3]) begin 
+                alufn = 4'b1110; //JALR
+              end 
+              else begin 
+                alufn = 4'b0000; //ADD DEF ( LOAD STORE ) 
+              end
+            end 
+    
     2'b11 : begin            //FUNC3 
               case (Instruction[14:12]) 
                 3'b000 : begin 

@@ -75,6 +75,8 @@ module alu(
             // slt & sltu
             4'b11_01:  r = {31'b0,(sf != vf)}; 
             4'b11_11:  r = {31'b0,(~cf)};            	
+            // jalr
+            4'b11_10:  r = {add[32-1:1], 1'b0}; 
         endcase
     end
 endmodule

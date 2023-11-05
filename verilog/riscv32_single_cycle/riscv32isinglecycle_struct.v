@@ -46,8 +46,6 @@ module riscv32iSingleCycle #(
 
 // Internal signal declarations
 wire  [8-1:0]    CONST4;
-wire  [32-1:0]   CONSTZ32;
-wire  [8-1:0]    CONSTZ8;
 wire  [32-1:0]   Instruction;
 wire  [1:0]      alu_op;
 wire             alu_src;
@@ -61,8 +59,8 @@ wire  [32 - 1:0] immediate;
 wire             jump;
 wire             load;
 wire  [1:0]      mem_out_sel;
-wire             mem_read;
-wire             mem_write;
+wire  [2:0]      mem_read;
+wire  [1:0]      mem_write;
 wire  [8-1:0]    pc_current_address;
 wire  [8 - 1:0]  pc_next;
 wire  [32 - 1:0] pc_plus_immediate;
@@ -79,19 +77,19 @@ wire             zf;
 
 
 // Instances 
-adder #(8) U_9( 
+adder #(8) pc_plus_four( 
    .A_in    (CONST4), 
    .B_in    (pc_current_address), 
    .sum_out (pc_next)
 ); 
 
-adder #(8) U_10( 
+adder #(8) pc_plus_Imm_ToTarget( 
    .A_in    (immediate[8-1:0]), 
    .B_in    (pc_current_address), 
    .sum_out (branch_target)
 ); 
 
-adder U_12( 
+adder pc_plus_Imm_ToWriteReg( 
    .A_in    ({24'b0, pc_current_address}), 
    .B_in    (immediate), 
    .sum_out (pc_plus_immediate)
@@ -158,30 +156,32 @@ instMem instMem_inst(
    .pc_current_address (pc_current_address >> 2)
 ); 
 
-mux U_13( 
+mux aluSrc_mux( 
    .hi_in   (immediate), 
    .lo_in   (rs2), 
    .sel_in  (alu_src), 
    .sel_out (b)
 ); 
 
-mux_4x1 U_15( 
+mux_4x1 writeToReg_mux( 
    .A_00    (read_data_out), 
    .B_01    (r), 
    .C_10    (pc_plus_immediate), 
-   .D_11    (CONSTZ32), 
+   .D_11    ({24'd0, pc_next}), 
    .sel     (mem_out_sel), 
    .sel_out (write_data_reg_file)
 ); 
 
-mux_4x1 #(8) U_16( 
+mux_4x1 #(8) targetAddr_mux( 
    .A_00    (pc_next), 
    .B_01    (branch_target), 
    .C_10    (pc_plus_immediate[8-1:0]), 
-   .D_11    (CONSTZ8), 
+   .D_11    (r[8-1:0]), 
    .sel     (branch_sel), 
    .sel_out (pc_target_addr)
 ); 
+
+
 
 pc pc_inst( 
    .clk                (clk), 
@@ -205,10 +205,6 @@ regFile regFile_inst(
 assign CONST4 = 8'd4;
 
 assign load = 1'd1;
-
-assign CONSTZ8 = 8'd0;
-
-assign CONSTZ32 = 32'd0;
 
 endmodule 
 

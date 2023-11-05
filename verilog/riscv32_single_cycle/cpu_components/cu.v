@@ -28,18 +28,18 @@ module cu(
    output  wire             branch, 
    output  wire             jump, 
    output  wire    [1:0]    mem_out_sel, 
-   output  wire             mem_read, 
-   output  wire             mem_write, 
+   output  wire    [2:0]    mem_read, 
+   output  wire    [1:0]    mem_write, 
    output  wire             reg_write
 );
 
-    reg [9:0] flags;
+    reg [12:0] flags;
     
     assign {jump, branch, mem_read, mem_out_sel, alu_op, mem_write, alu_src, reg_write} = flags;
       
 
     initial begin 
-        flags = 8'b00000000; 
+        flags = 13'd0; 
     end
     
     
@@ -51,36 +51,58 @@ module cu(
         case(Instruction) 
             
             //LUI 
-            7'b0110111 : flags = 10'b000_01_00_011; 
+            7'b0110111 : flags = 13'b00_000_01_00_00_11; 
             
             //AUIPC 
-            7'b0010111 : flags = 10'b000_10_00_001; 
+            7'b0010111 : flags = 13'b00_000_10_00_00_01; 
             
             //JAL      
-            7'b1101111 : flags = 10'b100_00_00_000; 
+            7'b1101111 : flags = 13'b10_000_00_00_00_00; 
+            
+            //JALR 
+            7'b1100111 : flags = 13'b11_000_11_10_00_11;
             
             //I-format 
-            7'b0010011 : flags = 10'b000_01_11_011;
+            7'b0010011 : flags = 13'b00_000_01_11_00_11;
             
-            // R-format
-            7'b0110011 : flags = 10'b000_01_11_001;
+            //R-format
+            7'b0110011 : flags = 13'b00_000_01_11_00_01;
             
-            // LW
-            7'b0000011 : flags = 10'b001_00_10_011;
             
-            // SW 
-            7'b0100011 : flags = 10'b000_00_10_110;
+            //LW
+            7'b0000011 : flags = 13'b00_001_00_10_00_11;  
+            
+            //LB 
+            7'b0000011 : flags = 13'b00_100_00_10_00_11;  
+            
+            //LBU
+            7'b0000011 : flags = 13'b00_101_00_10_00_11;  
+            
+            //LH
+            7'b0000011 : flags = 13'b00_010_00_10_00_11;  
+            
+            //LHU
+            7'b0000011 : flags = 13'b00_011_00_10_00_11; 
+             
+            
+            //SW 
+            7'b0100011 : flags = 13'b00_000_00_10_01_10;  
+            
+            //SH
+            7'b0100011 : flags = 13'b00_000_00_10_10_10;
+            
+            //SB
+            7'b0100011 : flags = 13'b00_000_00_10_11_10;
+            
             
             // BRANCHES 
-            7'b1100011 : flags = 10'b010_01_01_000;
+            7'b1100011 : flags = 13'b01_000_01_01_00_00;
           
             
-            default    : flags = 10'b000_00_00_000; 
+            default    : flags = 13'b00_000_00_00_00_00; 
             
         endcase
         
     end
 
-
-// Internal Declarations
 endmodule
