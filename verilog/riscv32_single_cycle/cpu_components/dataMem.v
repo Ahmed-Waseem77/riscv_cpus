@@ -32,18 +32,21 @@ module dataMem(
 	reg [32-1:0] mem [0:64-1];  
   integer i; 
 
-	initial begin 
-		for (i = 0; i < 64; i = i + 1) begin 
-			mem[i] <= 32'd0; 
-		end
-	end 
+
 
 	initial begin
-		//mem[0]=32'd17;
+		mem[0]=32'd17;
 		//mem[1]=32'd9; 
 		//mem[2]=32'd25;
-		mem[1] = 32'd20; 
-		mem[4] = 32'd1;
+		mem[1] = 32'b0000_0000_0000_0001_0000_0001_0000_0110; 
+		mem[2] = 32'b0000_0000_0000_0001_0000_0001_0000_0110;
+		mem[3] = 32'd5;
+		mem[4] = 32'b0000_0000_0000_0001_0000_0001_0000_0110;
+		mem[5] = 32'b0000_0000_0000_0001_0000_0001_0000_0110;
+		
+		for (i = 6; i < 64; i = i + 1) begin 
+                    mem[i] <= 32'd0; 
+        end
 	end 
 
 	//assign read_data_out = mem_read ? mem[r[8-1:0] >> 2] : read_data_out; // combinational always block 
