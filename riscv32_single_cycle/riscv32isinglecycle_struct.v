@@ -112,7 +112,7 @@ wire             mem_write;
 wire  [8-1:0]    pc_current_address;
 wire  [8 - 1:0]  pc_next;
 wire  [32 - 1:0] pc_plus_immediate;
-wire  [32 - 1:0] pc_target_addr;
+wire  [8 - 1:0] pc_target_addr;
 wire  [32- 1:0]  r;
 wire  [32 - 1:0] read_data_out;
 wire             reg_write;
@@ -138,7 +138,7 @@ adder #(8) U_10(
 ); 
 
 adder U_12( 
-   .A_in    (pc_current_address), 
+   .A_in    ({24'b0, pc_current_address}), 
    .B_in    (immediate), 
    .sum_out (pc_plus_immediate)
 ); 
@@ -201,7 +201,7 @@ immGen immGen_inst(
 
 instMem instMem_inst( 
    .Instruction        (Instruction), 
-   .pc_current_address (pc_current_address)
+   .pc_current_address (pc_current_address >> 2)
 ); 
 
 mux U_13( 

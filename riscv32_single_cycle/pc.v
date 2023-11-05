@@ -5,8 +5,8 @@ module pc(
    // Port Declarations
    input   wire                       clk, 
    input   wire                       load, 
-   output  wire    [8 - 1:0]   pc_current_address, 
-   input   wire    [32 - 1:0]          pc_target_addr, 
+   output  wire    [8 - 1:0]          pc_current_address, 
+   input   wire    [8 - 1:0]          pc_target_addr, 
    input   wire                       rst
 );
 
@@ -17,13 +17,13 @@ module pc(
 
 
 // ### Please start your Verilog code here ### 
-reg [32-1:0] pc; 
+reg [8-1:0] pc; 
 assign load = 1'b1; 
 assign pc_current_address = pc;
 
-always @(posedge clk or negedge rst) begin 
-  if (!rst) begin
-    pc <= 32'd0;
+always @(posedge clk or posedge rst) begin 
+  if (rst) begin
+    pc <= 8'b0;
   end 
   else if (load) begin 
     pc <= pc_target_addr;  

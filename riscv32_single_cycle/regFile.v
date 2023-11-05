@@ -18,24 +18,26 @@ module regFile(
 // Internal Declarations
 
 
-wire [5-1:0] rs1_in, rs2_in; 
+wire [5-1:0] rs1_in, rs2_in, rd_in; 
 assign rs1_in = Instruction[19:15]; 
 assign rs2_in = Instruction[24:20];
+assign rd_in  = Instruction[11:7];
 
 
 reg [32-1:0] reg_file [32-1:0]; 
 
 
 integer i;
-always @(posedge clk or negedge rst) begin : RESET 
-  if (!rst) begin 
+always @(posedge clk or posedge rst) begin : RESET 
+  if (rst) begin 
       for (i = 0; i < 32; i = i + 1) begin 
-        reg_file[i] <= {{32{1'b0}}}; 
+        reg_file[i] <= 32'd0; 
       end
   end
-  else if(reg_write && rst) begin
-    reg_file[i] <= write_data_reg_file;
+  else if(reg_write) begin
+    reg_file[rd_in] <= write_data_reg_file;
   end 
+  reg_file[0] <= 32'b0;
 end 
 
 assign rs1 = reg_file[rs1_in]; 

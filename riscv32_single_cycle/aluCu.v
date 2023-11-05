@@ -33,7 +33,14 @@ always @(*) begin : COMBINATIONAL_OUTPUT
     2'b10 : alufn = 4'b0000; //ADD
     2'b11 : begin            //FUNC3 
               case (Instruction[14:12]) 
-                3'b000 : alufn = 4'b0000;       //ADD/ADDI
+                3'b000 : begin 
+                           if(Instruction[30]==1'b1) begin 
+                               alufn = 4'b0001; //SUB
+                           end 
+                           else begin 
+                               alufn = 4'b0000; //ADD/ADDI
+                           end 
+                         end                  
                 3'b010 : alufn = 4'b1101;       //SLT/SLTI 
                 3'b011 : alufn = 4'b1111;       //SLTU/SLTIU 
                 3'b100 : alufn = 4'b0111;       //XOR/XORI 
