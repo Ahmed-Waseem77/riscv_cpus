@@ -22,8 +22,7 @@
 `timescale 1ns/10ps
 
 module alu( 
-   input   wire    [24:20]     Instruction, 
-   input   wire    [3:0]       alufn, 
+   input   wire    [4:0]       alufn, 
    input   wire    [32 - 1:0]  b, 
    output  wire                cf, 
    output  reg     [32- 1:0]   r, 
@@ -37,11 +36,29 @@ module alu(
 // Internal Declarations
     wire [32-1:0] a; 
     wire [4:0] shamt; 
-    assign shamt = Instruction;
+    assign shamt = b[4:0];
     assign a = rs1;
     
     
-    wire [31:0] add, op_b;
+    wire [31:0] add, divu, remu, op_b;
+    wire signed [31:0] mul, mulh, mulhsu, div, rem;
+    wire [31:0] mulhu;
+    
+    wire signed [64-1:0] mul_temp; 
+    wire [64-1:0] mulu_temp;      //UNSINGED
+    
+    
+    assign div = a / b; 
+    assign divu = a / b; 
+    assign rem = a % b; 
+    assign remu = a % b;
+    assign mul_temp = a * b;
+    assign mulu_temp = a * b;
+    
+    assign mul    = mul_temp[32-1:0]; 
+    assign mulh   = mul_temp[64-1:32];   //SIGNED
+    assign mulhu  = mulu_temp[64-1:32];  //UNSIGNED
+    assign mulhsu = mul_temp[64-1:32];   //SIGNED 
     
     assign op_b = (~b);
     
@@ -52,31 +69,44 @@ module alu(
     assign vf = (a[31] ^ (op_b[31]) ^ add[31] ^ cf);
     
     wire[31:0] sh;
-    shifter shifter0(.a(a), .shamt(b[4:0]), .type(alufn[1:0]),  .r(sh));
+    shifter shifter0(.a(a), .shamt(shamt), .type(alufn[1:0]),  .r(sh));
     
 
+    initial begin 
+      r = 0; 
+    end
 
-    always @ * begin
-        r = 0;
-        (* parallel_case *)
+    always @ (*) begin
+        //(* parallel_case *)
         case (alufn)
             // arithmetic
-            4'b00_00 : r = add;
-            4'b00_01 : r = add;
-            4'b00_11 : r = b;
+            5'b000_00 : r = add;
+            5'b000_01 : r = add;
+            5'b000_11 : r = b;
             // logic
-            4'b01_00:  r = a | b;
-            4'b01_01:  r = a & b;
-            4'b01_11:  r = a ^ b;
+            5'b001_00:  r = a | b;
+            5'b001_01:  r = a & b;
+            5'b001_11:  r = a ^ b;
             // shift
-            4'b10_00:  r = sh;
-            4'b10_01:  r = sh;
-            4'b10_10:  r = sh;
+            5'b010_00:  r = sh;
+            5'b010_01:  r = sh;
+            5'b010_10:  r = sh;
             // slt & sltu
-            4'b11_01:  r = {31'b0,(sf != vf)}; 
-            4'b11_11:  r = {31'b0,(~cf)};            	
+            5'b011_01:  r = {31'b0,(sf != vf)}; 
+            5'b011_11:  r = {31'b0,(~cf)};    
             // jalr
-            4'b11_10:  r = {add[32-1:1], 1'b0}; 
+            5'b011_10:  r = {add[32-1:1], 1'b0}; 
+            // mul div & rem 
+            5'b10000 :  r = mul; //MUL
+            5'b10001 :  r = mulh; //MULH 
+            5'b10010 :  r = mulhsu; //MULHSU
+            5'b10011 :  r = mulhu; //MULHU
+            5'b10100 :  r = div; //DIV
+            5'b10101 :  r = divu; //DIVU
+            5'b10110 :  r = rem; //REM
+            5'b10111 :  r = remu; //REMU 
+            
+            default : r = r;
         endcase
     end
 endmodule

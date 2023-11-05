@@ -47,9 +47,9 @@ module riscv32iSingleCycle #(
 // Internal signal declarations
 wire  [8-1:0]    CONST4;
 wire  [32-1:0]   Instruction;
-wire  [1:0]      alu_op;
+wire  [2:0]      alu_op;
 wire             alu_src;
-wire  [3:0]      alufn;
+wire  [4:0]      alufn;
 wire  [32 - 1:0] b;
 wire             branch;
 wire  [1:0]      branch_sel;
@@ -103,7 +103,6 @@ alu alu_inst(
    .vf          (vf), 
    .zf          (zf), 
    .b           (b), 
-   .Instruction (Instruction[24:20]), 
    .alufn       (alufn)
 ); 
 
@@ -125,7 +124,7 @@ branchCu branchCu_inst(
 ); 
 
 cu cu_inst( 
-   .Instruction (Instruction[7-1:0]), 
+   .Instruction (Instruction), 
    .alu_op      (alu_op), 
    .alu_src     (alu_src), 
    .branch      (branch), 

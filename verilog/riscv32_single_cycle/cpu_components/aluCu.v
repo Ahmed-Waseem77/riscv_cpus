@@ -19,72 +19,84 @@
 
 */ 
 
+`resetall
 `timescale 1ns/10ps
 module aluCu( 
    input   wire    [32-1:0]   Instruction, 
-   input   wire    [1:0]      alu_op, 
-   output  reg     [3:0]      alufn
+   input   wire    [2:0]      alu_op, 
+   output  reg     [4:0]      alufn
 );
 
 
+// Internal Declarations
 
-//LUI     nop
-//AUIPC   no alu
-//JAL     no alu 
-//JALR    no alu
-//BRANCH  sub 
-//LOAD    add 
-//STORE   add 
-//I-F     FUNCT 
-//R-F     FUNCT 
 
-// nop    sub   add   FUNCT 
-// 00     01    10    11                  <= aluop
-// 0011   0001  0000  case on FUNCT       <= alufn output
+// nop    sub   add           I-FORMAT/R-FORMAT FUNCT           MUL/DIV/REM FUNCT     
+// 000    001   010           011                               100                                <= aluop
+// 0011   0001  check JALR    case on FUNCT                     case on FUNCT                      <= alufn output
 
 
 always @(*) begin : COMBINATIONAL_OUTPUT 
   case(alu_op) 
-    2'b00 : alufn = 4'b0011; //NOP
-    2'b01 : alufn = 4'b0001; //SUB 
-    2'b10 : begin 
+    3'b000 : alufn = 5'b00011; //NOP
+    3'b001 : alufn = 5'b00001; //SUB DEF ( BRANCHES )
+    3'b010 : begin 
               if (Instruction[3]) begin 
-                alufn = 4'b1110; //JALR
+                alufn = 5'b01110; //JALR
               end 
               else begin 
-                alufn = 4'b0000; //ADD DEF ( LOAD STORE ) 
+                alufn = 5'b00000; //ADD DEF ( LOAD STORE ) 
               end
             end 
-    
-    2'b11 : begin            //FUNC3 
+
+    3'b011 : begin            //FUNC3 I-FORMAT/ R-FORMAT
               case (Instruction[14:12]) 
                 3'b000 : begin 
                            if(Instruction[30]==1'b1 && Instruction[5]) begin 
-                               alufn = 4'b0001; //SUB
+                               alufn = 5'b00001; //SUB
                            end 
                            else begin 
-                               alufn = 4'b0000; //ADD / ADDI
+                               alufn = 5'b00000; //ADD / ADDI
                            end 
-                         end                  
-                3'b010 : alufn = 4'b1101;       //SLT/SLTI 
-                3'b011 : alufn = 4'b1111;       //SLTU/SLTIU 
-                3'b100 : alufn = 4'b0111;       //XOR/XORI 
-                3'b110 : alufn = 4'b0100;       //OR/ORI 
-                3'b111 : alufn = 4'b0101;       //AND/ANDI
-                3'b001 : alufn = 4'b1000;       //SLL/SLLI
+                         end   
+                                        
+                3'b010 : alufn = 5'b01101;       //SLT/SLTI 
+                3'b011 : alufn = 5'b01111;       //SLTU/SLTIU 
+                3'b100 : alufn = 5'b00111;       //XOR/XORI 
+                3'b110 : alufn = 5'b00100;       //OR/ORI 
+                3'b111 : alufn = 5'b00101;       //AND/ANDI
+                3'b001 : alufn = 5'b01000;       //SLL/SLLI
+                
                 3'b101 :  begin 
                             if (Instruction[30]==1'b1) begin
-                              alufn = 4'b1001;  //SRL/SRLI
+                              alufn = 5'b01001;  //SRL/SRLI
                             end
                             else begin 
-                              alufn = 4'b1010;  //SRA/SRAI
+                              alufn = 5'b01010;  //SRA/SRAI
                             end
                           end
                 
-                default : alufn = 4'b0011;
-                
+                default : alufn = 5'b00011;
               endcase
-            end
+             end
+            
+    3'b100 : begin // FUNCT ON MUL/DIV/REM
+               case(Instruction[14:12])
+                 3'b000 : alufn = 5'b10000;     //MUL
+                 3'b010 : alufn = 5'b10001;     //MULH
+                 3'b011 : alufn = 5'b10010;     //MULHSU
+                 3'b100 : alufn = 5'b10011;     //MULHU
+                 3'b110 : alufn = 5'b10100;     //DIV
+                 3'b111 : alufn = 5'b10101;     //DIVU
+                 3'b001 : alufn = 5'b10110;     //REM
+                 3'b101 : alufn = 5'b10111;     //REMU
+                 
+                 default : alufn = 5'b00011;                
+               endcase
+             end
+                
+    
+    default : alufn = 5'b00011;
   endcase
   
 end
