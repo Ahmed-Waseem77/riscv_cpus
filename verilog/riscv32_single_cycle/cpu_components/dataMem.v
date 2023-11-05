@@ -35,8 +35,7 @@ module dataMem(
 	assign read_data_out = mem_read ? mem[r[8-1:0] >> 2 ] : read_data_out; 
 
 	initial begin
-		mem[1] = 32'd20; 
-		mem[4] = 32'd1;
+
 	end 
 
 	always @(posedge clk) begin : MEM_WRITE_SEQ

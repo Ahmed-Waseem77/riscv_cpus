@@ -36,7 +36,7 @@ module alu(
 
 // Internal Declarations
     wire [32-1:0] a; 
-    wire shamt; 
+    wire [4:0] shamt; 
     assign shamt = Instruction;
     assign a = rs1;
     
@@ -52,7 +52,7 @@ module alu(
     assign vf = (a[31] ^ (op_b[31]) ^ add[31] ^ cf);
     
     wire[31:0] sh;
-    shifter shifter0(.a(a), .shamt(shamt), .type(alufn[1:0]),  .r(sh));
+    shifter shifter0(.a(a), .shamt(b[4:0]), .type(alufn[1:0]),  .r(sh));
     
 
 

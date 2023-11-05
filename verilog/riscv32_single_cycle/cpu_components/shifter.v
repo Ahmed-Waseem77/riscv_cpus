@@ -21,7 +21,7 @@
 
 
 `timescale 1ns/10ps
-module shifter( input       [31:0] a, 
+module shifter( input  signed     [31:0] a, 
                 input       [4:0]  shamt,  // 5 bits in rs2
                 input       [1:0]  type,   
                 // IR[30] IR[14]
@@ -37,8 +37,8 @@ wire [31:0] gnd = 32'd0;
 always @ * begin 
   case(type) 
     2'b00 : r = a << shamt; 
-    2'b01 : r = a >> shamt; 
-    2'b11 : r = a >>> shamt;   
+    2'b10 : r = a >> shamt; 
+    2'b01 : r = a >>> shamt;   
     default : r = gnd;
   endcase
 end
