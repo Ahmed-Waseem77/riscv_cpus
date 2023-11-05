@@ -33,7 +33,7 @@ Most modules pass linting tests for Xilinix chips specifically virtex2 rule sets
 
 The Design is implemented as is in blockdiagram.pdf.
 
-\section*{Implementation}
+\section{Implementation}
 \quad Implementation was done in Verilog, and tested by either using Vivado or Gtkwave and Iverilog. 
 
 Appending the datapath for more instructions was a matter of adding multiplexer, adders or functionality to CU/ALU as outlined in the block diagram pdf.
@@ -45,14 +45,14 @@ More tests where planned each having a specific purpose, but due to time constra
 
 We were not able to test the processor on the FPGA due to time constraints, but we are confident that it will work as intended as it passed liniting tests.
 
-\subsection*{Future testing objectives}
+\subsection{Future testing objectives}
 
 \quad Using Verilog's file interface we think we could make a more robust testing methodology, either a golden randomized self checking test-bench (which was in plan but was left blank due to time constraints), or a implement riscv un-official testing suite programs.
 
 \section{Results}  
 All simulation results in repo as waveforms.
 
-\subsection*{tested instructions} 
+\subsection{tested instructions} 
 All instructions tested passed, except for M-Spec instructions which were not tested.
 
 

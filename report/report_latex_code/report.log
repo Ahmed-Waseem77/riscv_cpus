@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.9.4)  6 NOV 2023 00:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.9.4)  6 NOV 2023 00:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -570,15 +570,15 @@ Package pgfplots notification 'compat/show suggested version=true': document has
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 42252 strings out of 477985
- 1138027 string characters out of 5840059
+ 42254 strings out of 477985
+ 1138055 string characters out of 5840059
  1868970 words of memory out of 5000000
- 61984 multiletter control sequences out of 15000+600000
- 521087 words of font info for 51 fonts, out of 8000000 for 9000
+ 61986 multiletter control sequences out of 15000+600000
+ 521541 words of font info for 53 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  117i,6n,118p,750b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on report.pdf (2 pages, 101646 bytes).
+Output written on report.pdf (2 pages, 104232 bytes).
 PDF statistics:
  45 PDF objects out of 1000 (max. 8388607)
  28 compressed objects within 1 object stream

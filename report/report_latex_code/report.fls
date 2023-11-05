@@ -690,6 +690,8 @@ INPUT ./report.toc
 INPUT report.toc
 INPUT report.toc
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 OUTPUT report.toc
 OUTPUT report.pdf
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
