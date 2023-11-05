@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[right=2cm, left=1cm, top=1cm, bottom=1cm]{geometry}
+\usepackage{parskip}
+\usepackage{circuitikz}
+\pagestyle{empty}
+
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{relsize}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{pgfplots}\pgfplotsset{compat = 1.18}
+
+\title{RISCV32IM Single Cycle Processor, Verilog Implementation \\ \vspace{0.2cm}\normalsize Computer Architecture Fall 2023: MS1 }  
+\author{Ahmed Waseem Mohamed Adly Raslan \and Ahmed Elbarbary}
+\date{October 5}
+
+
+\begin{document}
+\maketitle  
+\tableofcontents
+
+\break
+
+\section{Overview} 
+\quad RISC-V is an open and extensible instruction set architecture (ISA) that has gained popularity in recent years due to its simplicity and flexibility. The RV32I and RV32M specifications provide the foundation for a basic 32-bit RISC-V processor with integer and multiply/divide instructions. We planned on implementing RV32IM spec for MS1.
+
+\section{Methodology} 
+\quad We started A top-down approach for our design, we figured the lab code required a lot of refactoring, so we rewrote most modules with proper best practices. 
+
+Most modules pass linting tests for Xilinix chips specifically virtex2 rule sets.  
+
+The Design is implemented as is in blockdiagram.pdf.
+
+\section*{Implementation}
+\quad Implementation was done in Verilog, and tested by either using Vivado or Gtkwave and Iverilog. 
+
+Appending the datapath for more instructions was a matter of adding multiplexer, adders or functionality to CU/ALU as outlined in the block diagram pdf.
+
+\section{Testing Methodology}
+\quad Testing was done in increments, tests are put in tests folder along with gtkwave files if possible. We have tests for basic seven instruction done in lab, tests for loops, and R-format. 
+
+More tests where planned each having a specific purpose, but due to time constraints we opted to make one test encompassing all/other instructions (generaltest.txt). It however lacked testing for M-Spec instructions.  
+
+We were not able to test the processor on the FPGA due to time constraints, but we are confident that it will work as intended as it passed liniting tests.
+
+\subsection*{Future testing objectives}
+
+\quad Using Verilog's file interface we think we could make a more robust testing methodology, either a golden randomized self checking test-bench (which was in plan but was left blank due to time constraints), or a implement riscv un-official testing suite programs.
+
+\section{Results}  
+All simulation results in repo as waveforms.
+
+\subsection*{tested instructions} 
+All instructions tested passed, except for M-Spec instructions which were not tested.
+
+
+\end{document}
+
