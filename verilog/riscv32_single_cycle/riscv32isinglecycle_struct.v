@@ -21,7 +21,7 @@
 
 `resetall 
 
-`include "./macros.v"  //Pre-Module Directive definitions
+`include "./macros.v"              //Pre-Module Directive definitions
 
 `timescale 1ns/10ps 
 

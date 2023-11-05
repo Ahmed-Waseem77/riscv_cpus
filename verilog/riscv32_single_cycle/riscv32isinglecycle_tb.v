@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 /* 
     RiscV32I Single Cycle Processor 
     Copyright (C) 2023 Ahmed Waseem, Ahmed ElBarbary
@@ -19,6 +18,9 @@
 
 */     
 
+
+
+`timescale 1ns / 1ps
 module riscv32isinglecycle_tb();
 reg clk;
 reg rst;
@@ -32,8 +34,8 @@ initial begin
 end
                         
 initial begin  
-    $dumpfile("riscv32_single_cycle.vcd"); 
-    $dumpvars(0, riscv32_single_cycle_tb);
+    $dumpfile("riscv32iSingleCycle.vcd"); 
+    $dumpvars(0, riscv32isinglecycle_tb);
     rst = 1'b1;
     clk = 1'b0; 
     
