@@ -1,0 +1,41 @@
+00100093
+00200113
+00300193
+00400213
+00100293
+00108c63
+0beef3b7
+00000013
+fe319ae3
+00000013
+00008067
+fe0244e3
+00fed3b7
+fedff0ef
+00225463
+00000013
+00edd3b7
+00001397
+//addi x1, x0, 1
+//addi x2, x0, 2 
+//addi x3, x0, 3
+//addi x4, x0, 4
+//addi x5, x0, 1 
+//
+//.L1: beq x1, x1, .L3			
+//     lui x7, 0x0000beef    #x7 our debug register
+//     nop
+//     
+//.L2: bne x3, x3, .L1
+//     nop
+//     jalr x0, 0(ra)
+//     
+//.L3: blt x4, x0, .L1 
+//	   lui x7, 0x00000fed 	#test lui
+//      
+//.L4: jal ra, .L2
+//	   bge x4, x2, .L5
+//     nop
+//     
+//.L5: lui x7, 0x00000edd
+//	   auipc x7, 1
