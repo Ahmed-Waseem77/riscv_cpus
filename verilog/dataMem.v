@@ -31,13 +31,7 @@ module dataMem(
 
 reg [32-1:0] mem [0:64-1];  
 integer i; 
-initial begin
-    // Initialize memory to zero
-    for (i = 0; i < 64; i = i + 1) begin
-        mem[i] = 32'h00000000;
-    end
-    read_data_out = 32'd0;
-end
+
 initial $readmemh("riscv_ini.mem", mem);
 	
 	always @(*) begin : MEM_READ_COMBINATIONAL 

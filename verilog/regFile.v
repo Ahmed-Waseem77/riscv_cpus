@@ -28,7 +28,8 @@ module regFile(
    output  wire    [32 - 1:0]  rs1, 
    output  wire    [32 - 1:0]  rs2, 
    input   wire                rst, 
-   input   wire    [32 - 1:0]  write_data_reg_file
+   input   wire    [32 - 1:0]  write_data_reg_file,
+   input   wire    [11:7]      Instruction_rd
 );
 
 
@@ -36,7 +37,7 @@ module regFile(
 wire [5-1:0] rs1_in, rs2_in, rd_in; 
 assign rs1_in = Instruction[19:15]; 
 assign rs2_in = Instruction[24:20];
-assign rd_in  = Instruction[11:7];
+assign rd_in  = Instruction_rd;
 
 
 reg [32-1:0] reg_file [32-1:0]; 
