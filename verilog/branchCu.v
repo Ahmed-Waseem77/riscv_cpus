@@ -49,6 +49,4 @@ assign branch_sel[0] = (branch == 1'b1) && (((func3 == 3'd0) && (zf == 1'b1))
                                         || jump);   
 assign branch_sel[1] = jump;
 
-
-
 endmodule
