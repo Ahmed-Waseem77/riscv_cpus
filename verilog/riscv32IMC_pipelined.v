@@ -129,11 +129,11 @@ assign IF_ID_data_in =
    pc_current_address
 };
 
-assign IF_ID_data_out =
+assign 
 {
    IF_ID_Instruction,
    IF_ID_pc_current_address
-};
+}= IF_ID_data_out;
 
 register #(.N(32+8)) IF_ID (
    .clk (clk), 
@@ -145,6 +145,7 @@ register #(.N(32+8)) IF_ID (
 
 ////////////
 //ID STAGE
+
 regFile regFile_inst( 
    .clk                 (clk), 
    .reg_write           (MEM_WB_WB[2] /*reg_write*/), 
@@ -175,17 +176,17 @@ immGen immGen_inst(
 ////////////
 //ID_EX PIPE
 //concats
-wire [32+8+3+5+6+32+32+32-1:0]    ID_EX_data_in; 
-wire [32+8+3+5+6+32+32+32-1:0]    ID_EX_data_out; 
+wire [32+8+3+5+7+32+32+32-1:0]    ID_EX_data_in; 
+wire [32+8+3+5+7+32+32+32-1:0]    ID_EX_data_out; 
 wire [1+2-1:0]                    ID_EX_WB_in; 
-wire [6-1:0]                      ID_EX_M_in; 
+wire [7-1:0]                      ID_EX_M_in; 
 wire [4-1:0]                      ID_EX_EX_in;
 
 //register outputs
 wire [32-1:0]      ID_EX_Instruction; 
 wire [8-1:0]       ID_EX_pc_current_address;
 wire [3-1:0]       ID_EX_WB; 
-wire [6-1:0]       ID_EX_M; 
+wire [7-1:0]       ID_EX_M; 
 wire [4-1:0]       ID_EX_EX;
 wire [32-1:0]      ID_EX_rs1; 
 wire [32-1:0]      ID_EX_rs2; 
@@ -223,7 +224,7 @@ assign ID_EX_data_in =
    immediate
 };
 
-assign ID_EX_data_out =
+assign
 {
    ID_EX_WB,
    ID_EX_M,
@@ -233,9 +234,9 @@ assign ID_EX_data_out =
    ID_EX_rs1,
    ID_EX_rs2,
    ID_EX_immediate
-};
+} = ID_EX_data_out;
 
-register #(.N(32+8+3+5+6+32+32+32)) ID_EX (
+register #(.N(32+8+3+5+7+32+32+32)) ID_EX (
    .clk (clk), 
    .rst (rst), 
    .load(1'b1), 
@@ -280,13 +281,13 @@ aluCu aluCu_inst(
 /////////////
 //EX_MEM PIPE
 //concats
-wire [4+32*4+8+3+5-1:0]    EX_MEM_data_in; 
-wire [4+32*4+8+3+5-1:0]    EX_MEM_data_out; 
-wire [6-1:0]               EX_MEM_M_in; 
+wire [4+32*4+8+3+7-1:0]    EX_MEM_data_in; 
+wire [4+32*4+8+3+7-1:0]    EX_MEM_data_out; 
+wire [7-1:0]               EX_MEM_M_in; 
 wire [3-1:0]               EX_MEM_WB_in;
 
 //register outputs
-wire [6-1:0]       EX_MEM_M; 
+wire [7-1:0]       EX_MEM_M; 
 wire [3-1:0]       EX_MEM_WB;
 wire [32-1:0]      EX_MEM_Instruction; 
 wire [8-1:0]       EX_MEM_pc_current_address;
@@ -325,7 +326,7 @@ assign EX_MEM_data_in =
    zf
 };
 
-assign EX_MEM_data_out =
+assign
 {
    EX_MEM_WB,
    EX_MEM_M,
@@ -338,9 +339,9 @@ assign EX_MEM_data_out =
    EX_MEM_sf,
    EX_MEM_vf,
    EX_MEM_zf
-};
+} = EX_MEM_data_out;
 
-register #(.N(4+32*4+8+3+5)) EX_MEM (
+register #(.N(4+32*4+8+3+7)) EX_MEM (
    .clk (clk), 
    .rst (rst), 
    .load(1'b1), 
@@ -416,7 +417,7 @@ assign MEM_WB_data_in =
    read_data_out
 };
 
-assign MEM_WB_data_out =
+assign
 {
    MEM_WB_WB,
    MEM_WB_Instruction,
@@ -425,7 +426,7 @@ assign MEM_WB_data_out =
    MEM_WB_r,
    MEM_WB_rs2,
    MEM_WB_read_data_out
-};
+} = MEM_WB_data_out;
 
 register #(.N(4+32*5+8)) MEM_WB (
    .clk (clk), 
