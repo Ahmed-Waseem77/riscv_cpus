@@ -18,24 +18,21 @@
 
 */     
 
-
-
 `timescale 1ns / 1ps
-module riscv32isinglecycle_tb();
+module riscv32IMC_pipelined_tb();
 reg clk;
 reg rst;
 localparam p = 20;
-riscv32iSingleCycle DUT( 
-                        .clk(clk), 
-                        .rst(rst));
+riscv32IMC_pipelined DUT(.clk(clk), 
+                         .rst(rst));
                         
 initial begin
     forever #(p) clk = ~clk;
 end
                         
 initial begin  
-    $dumpfile("riscv32iSingleCycle.vcd"); 
-    $dumpvars(0, riscv32isinglecycle_tb);
+    $dumpfile("riscv32IMC_pipelined.vcd"); 
+    $dumpvars(0, riscv32IMC_pipelined_tb);
     rst = 1'b1;
     clk = 1'b0; 
     

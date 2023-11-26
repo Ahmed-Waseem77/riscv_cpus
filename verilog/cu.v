@@ -1,5 +1,3 @@
-
-
 /* 
     RiscV32I Single Cycle Processor 
     Copyright (C) 2023 Ahmed Waseem, Ahmed ElBarbary
@@ -91,20 +89,7 @@ module cu(
                                 default : flags = 14'b00_000_00_000_00_00;
                             endcase 
                          end
-            /* LB 
-            7'b0000011 : flags = 14'b00_100_00_010_00_11;  
-            
-            //LBU
-            7'b0000011 : flags = 14'b00_101_00_010_00_11;  
-            
-            //LH
-            7'b0000011 : flags = 14'b00_010_00_010_00_11;  
-            
-            //LHU
-            7'b0000011 : flags = 14'b00_011_00_010_00_11; 
-             */
-            
-            //SW 
+ 
             7'b0100011 : begin  
                             case(Instruction[14:12]) 
 
@@ -116,14 +101,6 @@ module cu(
                             endcase  
                         end
                     
-            /*SH
-            7'b0100011 : flags = 14'b00_000_00_010_10_10;
-            
-            //SB
-            7'b0100011 : flags = 14'b00_000_00_010_11_10;
-            */ 
-            
-            // BRANCHES 
             7'b1100011 : flags = 14'b01_000_01_001_00_00;
             
             
