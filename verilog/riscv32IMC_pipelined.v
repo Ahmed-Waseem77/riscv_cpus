@@ -84,8 +84,11 @@ wire             pcSrc;
 
 wire [32-1:0]    MEM_WB_Instruction;
 wire [3-1:0]     MEM_WB_WB; 
+wire [7-1:0]       EX_MEM_M; 
 
 wire [32-1:0]    EX_MEM_r; 
+
+wire [32-1:0]      EX_MEM_rs2;
 
 // Instances 
 
@@ -101,18 +104,28 @@ adder #(8) pc_plus_step(
 
 pc pc_inst( 
    .clk                (clk), 
-   .load               ((stall != 1)), 
+   .load               ((stall != 1)&(!(EX_MEM_M[4:2]|EX_MEM_M[1:0]))), 
    .pc_current_address (pc_current_address), 
    .pc_target_addr     (pc_target_addr), 
    .rst                (rst)
 ); 
-
+/*
 instMem instMem_inst( 
    .Instruction_out    (Instruction_in), 
    .step               (step),
    .pc_current_address (pc_current_address)
-); 
-
+); */
+single_memory SM(
+             .clk           (clk), 
+            .mem_read      (EX_MEM_M[4:2] ), //mem_read
+            .mem_write     (EX_MEM_M[1:0] ), //mem_write 
+            .rs2           (EX_MEM_rs2), 
+            .rst           (rst), 
+            .read_data_out (read_data_out),
+            .Instruction_out_reg(Instruction_in),
+            .step               (step),
+            .r_or_pc_current_address (((EX_MEM_M[4:2]!=0)|(EX_MEM_M[1:0]!=0))?EX_MEM_r:{24'b0, pc_current_address})
+    );
 decompressor decompressor_inst(
    .Instruction_in      (Instruction_in),
    .Instruction         (Instruction),
@@ -133,7 +146,7 @@ wire [8-1:0]    IF_ID_pc_current_address;
 
 assign IF_ID_data_in = 
 {
-   pcSrc ?  32'h00000033 : Instruction,
+   (pcSrc|EX_MEM_M[4:2]|EX_MEM_M[1:0]) ?  32'h00000033 : Instruction,
    pc_current_address
 };
 
@@ -305,7 +318,7 @@ assign forwarded_rs2 = s2_sel[1] ? (s2_sel[0] ? 32'hdeadbeef : EX_MEM_r)
 
 adder pc_plus_Imm( 
    .A_in    ({24'b0, ID_EX_pc_current_address}), 
-   .B_in    (ID_EX_immediate << 1), 
+   .B_in    (ID_EX_immediate), 
    .sum_out (pc_plus_immediate)
 ); 
 
@@ -351,13 +364,13 @@ wire [7-1:0]               EX_MEM_M_in;
 wire [3-1:0]               EX_MEM_WB_in;
 
 //register outputs
-wire [7-1:0]       EX_MEM_M; 
+
 wire [3-1:0]       EX_MEM_WB;
 wire [32-1:0]      EX_MEM_Instruction; 
 wire [8-1:0]       EX_MEM_pc_current_address;
 wire [32-1:0]      EX_MEM_pc_plus_immediate;
 //wire [32-1:0]      EX_MEM_r; 
-wire [32-1:0]      EX_MEM_rs2; 
+ 
 
 wire EX_MEM_cf, EX_MEM_sf, EX_MEM_vf, EX_MEM_zf;
 
@@ -373,7 +386,7 @@ assign EX_MEM_data_in =
    ID_EX_pc_current_address,
    pc_plus_immediate,
    r,
-   ID_EX_rs2,
+   forwarded_rs2,
    cf,
    sf,
    vf,
@@ -425,16 +438,17 @@ mux_4x1 #(8) targetAddr_mux(
    .sel     (branch_sel), 
    .sel_out (pc_target_addr)
 ); 
-
+/*
 dataMem dataMem_inst( 
    .clk           (clk), 
-   .mem_read      (EX_MEM_M[4:2] /*mem_read*/), 
-   .mem_write     (EX_MEM_M[1:0] /*mem_write*/), 
+   .mem_read      (EX_MEM_M[4:2] ), //mem_read
+   .mem_write     (EX_MEM_M[1:0] ), //mem_write
    .r             (EX_MEM_r), 
    .rs2           (EX_MEM_rs2), 
    .rst           (rst), 
    .read_data_out (read_data_out)
 ); 
+*/
 
 /////////////
 //MEM_WB PIPE
@@ -494,7 +508,7 @@ mux_4x1 writeToReg_mux(
    .A_00    (MEM_WB_read_data_out), 
    .B_01    (MEM_WB_r), 
    .C_10    (MEM_WB_pc_plus_immediate), 
-   .D_11    ({24'd0, pc_next}), 
+   .D_11    ({24'd0, MEM_WB_pc_current_address + 4}), 
    .sel     (MEM_WB_WB[1:0]), 
    .sel_out (write_data_reg_file)
 ); 
