@@ -1,0 +1,240 @@
+commit 3fac3ccd9996cbac778845d8909d6bc7b4c2e8a2
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Mon Nov 27 12:31:01 2023 +0200
+
+    uploading single memory
+
+commit 473f366d867a1311664e261e6ce0890acd107358
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Mon Nov 27 11:42:35 2023 +0200
+
+    pc_next
+
+commit 5417b107afde99043752b866313806d30c5e7ed9
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Mon Nov 27 07:27:35 2023 +0200
+
+    fixes to pipeline 2
+
+commit 354b50c07e553011f6ae892d624d9a1e8331035d
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Mon Nov 27 06:17:34 2023 +0200
+
+    flushing
+
+commit 6cfacba1b5f74af072e0553d1120fe4c82957a0b
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Mon Nov 27 05:52:20 2023 +0200
+
+    hazard detection unit
+
+commit ee6c921679c2a37858bffbf76775e7627e97019e
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Mon Nov 27 05:11:41 2023 +0200
+
+    testing, fixes to regFile
+
+commit 6584485889b858a809c9d7108f991a8b27092fc7
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Mon Nov 27 04:07:44 2023 +0200
+
+    fixes in pipeline 2
+
+commit 5152b494e6e0a35f6cb7c85303e15c1f430fd037
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Mon Nov 27 03:36:32 2023 +0200
+
+    srf el gn
+
+commit 113dff9d400771dbdafa27ecd902671462d53e22
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Mon Nov 27 02:26:09 2023 +0200
+
+    fixes that were overwritten, reintroduced
+
+commit 6d22713c9f8aafb1cb2db22fce1b79928a50f87a
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Mon Nov 27 02:05:46 2023 +0200
+
+    adding forwarding unit
+
+commit e571f3ee876acf7893a77e2345fe554d6058e8cb
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Mon Nov 27 00:25:41 2023 +0200
+
+    fixes to pipeline, 1
+
+commit 7780f38fe6b4862687308d732f371c43a3e136cd
+Merge: 9cde3e3 93745b4
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Sun Nov 26 21:18:58 2023 +0200
+
+    Merge branch 'riscv32IMC_pipelined' of https://github.com/Ahmed-Waseem77/riscv_cpus into riscv32IMC_pipelined
+
+commit 9cde3e346e4b5193e4d3d9eebe434de57fd86082
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Sun Nov 26 21:18:50 2023 +0200
+
+    waveform configuration file
+
+commit 93745b4b647a6a5106b47230eaa30486d5fb1169
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Sun Nov 26 21:16:35 2023 +0200
+
+    solving bugs
+
+commit 08a764bc040753463dd505fbe42466bde0b07d82
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Sun Nov 26 18:34:50 2023 +0200
+
+    pipeline implemetation phase 1
+
+commit f8a273b6e651c6971f8023123b3b05eb38cb8ca5
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Thu Nov 23 18:32:19 2023 +0200
+
+    updated README.md
+
+commit 287470ffe67d42b75208928c3b6c12882597fcf6
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Thu Nov 23 18:31:37 2023 +0200
+
+    updated README.md
+
+commit 182bcda20e5306039009d035c0fd9fd084ab8b52
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Thu Nov 23 18:30:14 2023 +0200
+
+    repo organization, Fixed and tested M spec, added logic to support C spec
+
+commit e84879d694cd0467817e245a58d40a6180337193
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Thu Nov 23 17:54:43 2023 +0200
+
+    syncing
+
+commit d101a41149da8569134cffdb62ff404bd46a897c
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Sat Nov 18 01:00:38 2023 +0200
+
+    repo organization
+
+commit 88922c7e04bd52daf8fbb9a9727aa38c51d1d47e
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Mon Nov 6 00:22:37 2023 +0200
+
+    Updated README.md
+
+commit 3eb4bc6b4cefd6a66482da7104a0a0fe4759580e
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Mon Nov 6 00:21:01 2023 +0200
+
+    Updated README.md
+
+commit 6cdf164dc012f50eca2d2c1290395954be85b9c7
+Author: Ahmed-Waseem77 <96356943+Ahmed-Waseem77@users.noreply.github.com>
+Date:   Mon Nov 6 00:19:25 2023 +0200
+
+    Update README.md
+
+commit 06a848c316cfdcb1ccc72d2ffa281e93a7903b1a
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Mon Nov 6 00:18:49 2023 +0200
+
+    repo organization, readme
+
+commit 27452cf4bff458f98d38e7b74bafc13a131fe5e0
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Mon Nov 6 00:07:54 2023 +0200
+
+    adding test files
+
+commit 446ba77e70c8021a3184e2bf5e304998a95fa865
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Sun Nov 5 23:58:58 2023 +0200
+
+    Create riscv32isinglecycle_tb_behav.wcfg
+
+commit 71524e3e4d697d0a50a31d7c36a214d0dd03ea2b
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Sun Nov 5 23:55:37 2023 +0200
+
+    updating isntruction memory
+
+commit d8cbff82d57d12345f69fb1241d24367cd232865
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Sun Nov 5 23:12:42 2023 +0200
+
+    added M spec, fixed load store subsidaries
+
+commit a7581f82e80f612d1b3acb780f8d272240a1ea44
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Sun Nov 5 23:12:28 2023 +0200
+
+    added M spec, fixed load store subsidaries
+
+commit 4b59bc9b93ec02a40c1c86abc3b0d1eb428ac5ab
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Sun Nov 5 22:37:01 2023 +0200
+
+    testing
+
+commit f3584db643ef7b5dd95190f0cc9c6e0f2a076943
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Sun Nov 5 18:37:45 2023 +0200
+
+    finished rest of I spec Instructions, awaiting testing
+
+commit af1bdf0cffbce6bd341e0faa0e1ab2dfd651cbe7
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Sun Nov 5 15:17:29 2023 +0200
+
+    R-format testing, fixed shifting
+
+commit f338e364334936b9d2c8abd07d77340310c14a46
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Sun Nov 5 11:45:06 2023 +0200
+
+    repo organization, some preliminary tests
+
+commit dca86a2af15e1caf2edf02922ab2b6db5ccd922f
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Sun Nov 5 11:44:18 2023 +0200
+
+    repo organizaton, gtkwaveform tests
+
+commit 32b24bba54b41895c371c2f6c0cff83bbf18bb79
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Sun Nov 5 03:48:48 2023 +0200
+
+    blank readme, directives file, repo organization
+
+commit d3bdb0eca0cabe48012671dbd7d50a37cb91b616
+Author: Ahmed-Waseem77 <ahmedwaseemr@aucegypt.edu>
+Date:   Sun Nov 5 03:22:39 2023 +0200
+
+    repo organization
+
+commit 49f8703b70855c6637cca5b72a3787e511edc6b0
+Author: elbarbary <96207250+elbarbary@users.noreply.github.com>
+Date:   Sun Nov 5 02:05:18 2023 +0200
+
+    bug fixes and testing
+
+commit 9abfde6e5329bb7b0592127cab112b25e2082147
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Sat Nov 4 23:39:32 2023 +0200
+
+    fixing connections
+
+commit 920c676af3ee3cdfe0e36944fe0a89ab80aea6d0
+Author: Ahmed Waseem <AhmedWaseemR@aucegypt.edu>
+Date:   Sat Nov 4 21:57:37 2023 +0200
+
+    Initial commit
+
+commit 864cfad9bd421a1eca366465cec990cc48a5b5e1
+Author: Ahmed-Waseem77 <96356943+Ahmed-Waseem77@users.noreply.github.com>
+Date:   Sat Nov 4 21:48:16 2023 +0200
+
+    Initial commit
