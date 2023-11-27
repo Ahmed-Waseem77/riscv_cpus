@@ -55,7 +55,7 @@ module alu(
     wire [64-1:0] mulu_temp;      //UNSINGED
     
     
-    assign div = a / b; 
+    assign div = (b != 0) ? (a / b) : 32'hdeaddead; //debug mark for division by zero
     assign divu = a_u / b_u; 
     assign rem = a % b; 
     assign remu = a_u % b_u;

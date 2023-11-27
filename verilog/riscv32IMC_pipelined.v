@@ -248,6 +248,27 @@ register #(.N(32+8+3+5+7+32+32+32)) ID_EX (
 ////////////
 //EX STAGE
 
+forwarding_unit f1 
+(   
+    .ID_EX_rs1_addr(ID_EX_Instruction[19:15]), 
+    .ID_EX_rs2_addr(ID_EX_Instruction[24:20]), 
+    .EX_MEM_rd(EX_MEM_Instruction[11:7]),
+    .MEM_WB_rd(MEM_WB_Instruction[11:7]), 
+    .EX_MEM_wb(EX_MEM_WB[2:1]),
+    .MEM_WB_wb(MEM_WB_WB[2:1]),
+    .s1_sel(s1_sel), 
+    .s2_sel(s2_sel)                  
+); 
+
+wire [32-1:0] forwarded_rs1; 
+wire [32-1:0] forwarded_rs2; 
+
+assign forwarded_rs1 = s1_sel[1] ? (s1_sel[0] ? 32'hdeadbeef : EX_MEM_r) 
+                                   : (s1_sel[0] ? write_data_reg_file : ID_EX_rs1); 
+
+assign forwarded_rs2 = s2_sel[1] ? (s2_sel[0] ? 32'hdeadbeef : EX_MEM_r) 
+                                   : (s2_sel[0] ? write_data_reg_file : ID_EX_rs2);  
+
 adder pc_plus_Imm( 
    .A_in    ({24'b0, ID_EX_pc_current_address}), 
    .B_in    (ID_EX_immediate), 
@@ -256,7 +277,7 @@ adder pc_plus_Imm(
 
 mux aluSrc_mux( 
    .hi_in   (ID_EX_immediate), 
-   .lo_in   (ID_EX_rs2), 
+   .lo_in   (forwarded_rs2), 
    .sel_in  (ID_EX_EX[3] /*alu_src*/), 
    .sel_out (b)
 ); 
@@ -264,7 +285,7 @@ mux aluSrc_mux(
 alu alu_inst( 
    .cf          (cf), 
    .r           (r), 
-   .rs1         (ID_EX_rs1), 
+   .rs1         (forwarded_rs1), 
    .sf          (sf), 
    .vf          (vf), 
    .zf          (zf), 

@@ -25,8 +25,8 @@
 `timescale 1ns/1ps
 
 module forwarding_unit(
-input       [5-1:0] ID_EX_rs1, 
-input       [5-1:0] ID_EX_rs2, 
+input       [5-1:0] ID_EX_rs1_addr, 
+input       [5-1:0] ID_EX_rs2_addr, 
 input       [5-1:0] EX_MEM_rd,
 input       [5-1:0] MEM_WB_rd, 
 input       [1:0] EX_MEM_wb, 
@@ -42,13 +42,13 @@ always @ (*) begin
 
     if (EX_MEM_wb[1] 
     && (EX_MEM_rd != 5'b0) 
-    && (EX_MEM_rd == ID_EX_rs1)) begin 
+    && (EX_MEM_rd == ID_EX_rs1_addr)) begin 
         
         s1_sel = 2'b10;  
     end  
     else if (MEM_WB_wb[1]
          && (MEM_WB_rd != 5'b0 ) 
-         && (MEM_WB_rd == ID_EX_rs1))
+         && (MEM_WB_rd == ID_EX_rs1_addr))
     begin 
 
        
@@ -63,13 +63,13 @@ always @ (*) begin
   always @(*) begin
     if (EX_MEM_wb[1] 
     && (EX_MEM_rd != 5'b0) 
-    && (EX_MEM_rd == ID_EX_rs2)) begin  
+    && (EX_MEM_rd == ID_EX_rs2_addr)) begin  
         
         s2_sel = 2'b10;  
     end     
     else if (MEM_WB_wb[1] 
          && (MEM_WB_rd != 5'b0 ) 
-         && (MEM_WB_rd == ID_EX_rs2)) begin 
+         && (MEM_WB_rd == ID_EX_rs2_addr)) begin 
         
         s2_sel = 2'b01; 
         
