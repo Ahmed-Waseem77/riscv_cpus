@@ -153,8 +153,7 @@ regFile regFile_inst(
    .rs2                 (rs2), 
    .rst                 (rst), 
    .write_data_reg_file (write_data_reg_file), 
-   .Instruction         (IF_ID_Instruction),
-   .Instruction_rd      (MEM_WB_Instruction[11:7])
+   .Instruction         (MEM_WB_Instruction)
 ); 
 
 cu cu_inst( 
@@ -247,6 +246,20 @@ register #(.N(32+8+3+5+7+32+32+32)) ID_EX (
 
 ////////////
 //EX STAGE
+wire [31:0] EX_MEM_rd_in = {27'd0, EX_MEM_Instruction[11:7]};
+wire [31:0] MEM_WB_rd_in = {27'd0, MEM_WB_Instruction[11:7]};
+wire [1:0] s1_sel; 
+wire [1:0] s2_sel;  
+module forwardidng_unit(
+                        .ID_EX_rs1(ID_EX_rs1), 
+                        .ID_EX_rs2(ID_EX_rs2), 
+                        .EX_MEM_rd(EX_MEM_rd_in),
+                        .MEM_WB_rd(MEM_WB_rd_in), 
+                        .EX_MEM_wb(EX_MEM_wb[2:1]),
+                        .MEM_WB_wb(MEM_WB_WB[2:1]),
+                        .s1_sel(s1_sel), 
+                        .s2_sel(s2_sel)
+                            ); 
 
 adder pc_plus_Imm( 
    .A_in    ({24'b0, ID_EX_pc_current_address}), 
@@ -257,7 +270,7 @@ adder pc_plus_Imm(
 mux aluSrc_mux( 
    .hi_in   (ID_EX_immediate), 
    .lo_in   (ID_EX_rs2), 
-   .sel_in  (ID_EX_EX[3] /*alu_src*/), 
+   .sel_in  (ID_EX_EX[2] /*alu_src*/), 
    .sel_out (b)
 ); 
 
@@ -271,10 +284,16 @@ alu alu_inst(
    .b           (b), 
    .alufn       (alufn)
 ); 
+// ALU connections 
+assign rs1 = s1_sel[1] ? (s1_sel[0] ? 32'hdeadbeef : EX_MEM_r) 
+                                   : (s1_sel[0] ? write_data_reg_file : ID_EX_rs1); 
+
+assign b = s2_sel[1] ? (s2_sel[0] ? 32'hdeadbeef : EX_MEM_r) 
+                                   : (s2_sel[0] ? write_data_reg_file : b);  
 
 aluCu aluCu_inst( 
    .Instruction (ID_EX_Instruction), 
-   .alu_op      (ID_EX_EX[2:0] /*alu_op*/), 
+   .alu_op      (ID_EX_EX[5:3] /*alu_op*/), 
    .alufn       (alufn)
 ); 
 
@@ -298,9 +317,19 @@ wire [32-1:0]      EX_MEM_rs2;
 
 wire EX_MEM_cf, EX_MEM_sf, EX_MEM_vf, EX_MEM_zf;
 
-assign EX_MEM_WB_in = ID_EX_WB;
+assign EX_MEM_WB_in = 
+{
+  reg_write,
+  mem_out_sel
+};
 
-assign EX_MEM_M_in = ID_EX_M;
+assign EX_MEM_M_in = 
+{
+  branch,
+  jump,
+  mem_read,
+  mem_write
+};
 
 assign EX_MEM_data_in = 
 {
@@ -310,7 +339,7 @@ assign EX_MEM_data_in =
    ID_EX_pc_current_address,
    pc_plus_immediate,
    r,
-   ID_EX_rs2,
+   rs2,
    cf,
    sf,
    vf,
@@ -391,7 +420,11 @@ wire [32-1:0]      MEM_WB_rs2;
 wire [32-1:0]      MEM_WB_read_data_out;
 
 
-assign MEM_WB_WB_in = EX_MEM_WB;
+assign MEM_WB_WB_in = 
+{
+  reg_write,
+  mem_out_sel
+};
 
 assign MEM_WB_data_in = 
 {
