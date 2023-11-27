@@ -305,7 +305,7 @@ assign forwarded_rs2 = s2_sel[1] ? (s2_sel[0] ? 32'hdeadbeef : EX_MEM_r)
 
 adder pc_plus_Imm( 
    .A_in    ({24'b0, ID_EX_pc_current_address}), 
-   .B_in    (ID_EX_immediate), 
+   .B_in    (ID_EX_immediate << 1), 
    .sum_out (pc_plus_immediate)
 ); 
 
@@ -337,8 +337,8 @@ wire [3+1+1+1+2+2:0] temp2;
 
 assign temp2 = (pcSrc) ? 0 : {ID_EX_WB, ID_EX_M}; 
 
-wire [7-1:0] ID_EX_WB_mx;
-wire [3-1:0] ID_EX_M_mx;
+wire [3-1:0] ID_EX_WB_mx;
+wire [7-1:0] ID_EX_M_mx;
 
 assign {ID_EX_WB_mx, ID_EX_M_mx} = temp2;
 
@@ -501,7 +501,7 @@ mux_4x1 writeToReg_mux(
 
 // 
 
-assign pcSrc = branch_sel[1] * branch_sel[0];
+assign pcSrc = branch_sel[1] ^ branch_sel[0];
 
 //CONSTANTS AND FPGA VERIFICATION OUTPUTS
 

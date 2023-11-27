@@ -47,7 +47,7 @@ initial $readmemh("riscv_ini.mem", mem);
 	  endcase
 	end
 
-	always @(posedge clk) begin : MEM_WRITE_SEQ 
+	always @(negedge clk) begin : MEM_WRITE_SEQ 
 	  case(mem_write) 
 	    2'b00 : mem[r[8-1:0] >> 2] <= mem[r[8-1:0] >> 2]; 
 	    2'b01 : mem[r[8-1:0] >> 2] <= rs2; //SW
