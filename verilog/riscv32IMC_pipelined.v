@@ -274,6 +274,7 @@ assign forwarded_rs1 = s1_sel[1] ? (s1_sel[0] ? 32'hdeadbeef : EX_MEM_r)
 assign forwarded_rs2 = s2_sel[1] ? (s2_sel[0] ? 32'hdeadbeef : EX_MEM_r) 
                                    : (s2_sel[0] ? write_data_reg_file : ID_EX_rs2);  
 
+
 adder pc_plus_Imm( 
    .A_in    ({24'b0, ID_EX_pc_current_address}), 
    .B_in    (ID_EX_immediate), 

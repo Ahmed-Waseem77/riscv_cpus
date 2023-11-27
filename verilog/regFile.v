@@ -44,7 +44,7 @@ reg [32-1:0] reg_file [32-1:0];
 
 
 integer i;
-always @(posedge clk or posedge rst) begin : RESET 
+always @(negedge clk or negedge rst) begin : RESET 
   if (rst) begin 
       for (i = 0; i < 32; i = i + 1) begin 
         reg_file[i] <= 32'd0; 
