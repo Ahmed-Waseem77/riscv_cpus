@@ -77,6 +77,7 @@ wire  [32 - 1:0] write_data_reg_file;
 wire             zf;
 wire  [32-1:0]   Instruction_in;
 wire             step;
+wire             stall;
 
 //pipeline internal declarations
 
@@ -87,6 +88,9 @@ wire [32-1:0]    EX_MEM_r;
 
 // Instances 
 
+
+
+
 //IF STAGE
 adder #(8) pc_plus_step( 
    .A_in    (step ? CONST2 : CONST4), 
@@ -96,7 +100,7 @@ adder #(8) pc_plus_step(
 
 pc pc_inst( 
    .clk                (clk), 
-   .load               (load), 
+   .load               ((stall != 1)), 
    .pc_current_address (pc_current_address), 
    .pc_target_addr     (pc_target_addr), 
    .rst                (rst)
@@ -140,13 +144,15 @@ assign
 register #(.N(32+8)) IF_ID (
    .clk (clk), 
    .rst (rst), 
-   .load(1'b1), 
+   .load(~stall), 
    .D   (IF_ID_data_in),
    .Q   (IF_ID_data_out)
 );
 
 ////////////
 //ID STAGE
+
+                                                     
 
 regFile regFile_inst( 
    .clk                 (clk), 
@@ -170,6 +176,17 @@ cu cu_inst(
    .mem_write   (mem_write), 
    .reg_write   (reg_write)
 );
+
+//hazard detection mux
+wire [3+1+1+1+2+3+2+1:0] temp1;
+assign temp1 = (stall) ? 0 : {alu_op, alu_src, branch, jump, mem_out_sel, mem_read, mem_write, reg_write}; 
+
+wire  [3-1:0]    alu_op_mx, mem_read_mx;
+wire             alu_src_mx, branch_mx, jump_mx, reg_write_mx;
+wire  [2-1:0]    mem_out_sel_mx, mem_write_mx;
+
+assign {alu_op_mx, alu_src_mx, branch_mx, jump_mx, mem_out_sel_mx, mem_read_mx, mem_write_mx, reg_write_mx} = temp1;
+
 
 immGen immGen_inst( 
    .Instruction (IF_ID_Instruction), 
@@ -197,22 +214,22 @@ wire [32-1:0]      ID_EX_immediate;
 
 assign ID_EX_WB_in = 
 {
-  reg_write,
-  mem_out_sel
+  reg_write_mx,
+  mem_out_sel_mx
 };
 
 assign ID_EX_M_in = 
 {
-  branch,
-  jump,
-  mem_read,
-  mem_write
+  branch_mx,
+  jump_mx,
+  mem_read_mx,
+  mem_write_mx
 };
 
 assign ID_EX_EX_in = 
 {
-  alu_src,
-  alu_op
+  alu_src_mx,
+  alu_op_mx
 };
 
 assign ID_EX_data_in = 
@@ -247,13 +264,22 @@ register #(.N(32+8+3+5+7+32+32+32)) ID_EX (
    .Q   (ID_EX_data_out)
 );
 
+
 ////////////
 //EX STAGE
+
+hazard_detection_unit hazard_detection_unit_inst(
+   .IF_ID_RegisterRs1(IF_ID_Instruction[19:15]), 
+   .IF_ID_RegisterRs2(IF_ID_Instruction[24:20]),
+   .ID_EX_RegisterRd(ID_EX_Instruction[11:7]), 
+   .ID_EX_memRead((ID_EX_M[2:0] != 3'd0)), 
+   .stall(stall)
+);         
 
 wire [1:0] s1_sel;
 wire [1:0] s2_sel;
 
-forwarding_unit f1 
+forwarding_unit forwarding_unit_inst 
 (   
     .ID_EX_rs1_addr(ID_EX_Instruction[19:15]), 
     .ID_EX_rs2_addr(ID_EX_Instruction[24:20]), 

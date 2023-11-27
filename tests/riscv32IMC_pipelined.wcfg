@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="83333333fs"></ZoomStartTime>
-      <ZoomEndTime time="583333334fs"></ZoomEndTime>
-      <Cursor1Time time="500000000fs"></Cursor1Time>
+      <ZoomStartTime time="395950000fs"></ZoomStartTime>
+      <ZoomEndTime time="882950001fs"></ZoomEndTime>
+      <Cursor1Time time="623950000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="239"></NameColumnWidth>
-      <ValueColumnWidth column_width="130"></ValueColumnWidth>
+      <ValueColumnWidth column_width="126"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="20" />
    <wave_markers>
       <marker time="978160000" label="" />
    </wave_markers>
@@ -47,7 +47,7 @@
    <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/regFile_inst/write_data_reg_file" type="array">
       <obj_property name="ElementShortName">write_data_reg_file[31:0]</obj_property>
       <obj_property name="ObjectShortName">write_data_reg_file[31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="group178" type="group">
       <obj_property name="label">MODULES</obj_property>
@@ -73,6 +73,7 @@
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/pc_inst/pc_target_addr" type="array">
             <obj_property name="ElementShortName">pc_target_addr[7:0]</obj_property>
             <obj_property name="ObjectShortName">pc_target_addr[7:0]</obj_property>
+            <obj_property name="isExpanded"></obj_property>
          </wvobject>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/pc_inst/pc" type="array">
             <obj_property name="ElementShortName">pc[7:0]</obj_property>
@@ -82,7 +83,6 @@
       <wvobject fp_name="group73" type="group">
          <obj_property name="label">INST_MEM</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/instMem_inst/Instruction_out" type="array">
             <obj_property name="ElementShortName">Instruction_out[31:0]</obj_property>
             <obj_property name="ObjectShortName">Instruction_out[31:0]</obj_property>
@@ -107,7 +107,6 @@
       <wvobject fp_name="group765" type="group">
          <obj_property name="label">DECOMPRESSOR</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/decompressor_inst/Instruction_in" type="array">
             <obj_property name="ElementShortName">Instruction_in[31:0]</obj_property>
             <obj_property name="ObjectShortName">Instruction_in[31:0]</obj_property>
@@ -137,7 +136,6 @@
       <wvobject fp_name="group86" type="group">
          <obj_property name="label">REG_FILE</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/regFile_inst/reg_write" type="logic">
             <obj_property name="ElementShortName">reg_write</obj_property>
             <obj_property name="ObjectShortName">reg_write</obj_property>
@@ -154,7 +152,6 @@
             <obj_property name="ElementShortName">write_data_reg_file[31:0]</obj_property>
             <obj_property name="ObjectShortName">write_data_reg_file[31:0]</obj_property>
             <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-            <obj_property name="isExpanded"></obj_property>
          </wvobject>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/regFile_inst/rs1_in" type="array">
             <obj_property name="ElementShortName">rs1_in[4:0]</obj_property>
@@ -180,6 +177,7 @@
       <wvobject fp_name="group99" type="group">
          <obj_property name="label">CU</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/cu_inst/Instruction" type="array">
             <obj_property name="ElementShortName">Instruction[31:0]</obj_property>
             <obj_property name="ObjectShortName">Instruction[31:0]</obj_property>
@@ -221,6 +219,38 @@
             <obj_property name="ElementShortName">flags[13:0]</obj_property>
             <obj_property name="ObjectShortName">flags[13:0]</obj_property>
          </wvobject>
+      </wvobject>
+      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_op_mx" type="array">
+         <obj_property name="ElementShortName">alu_op_mx[2:0]</obj_property>
+         <obj_property name="ObjectShortName">alu_op_mx[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/mem_read_mx" type="array">
+         <obj_property name="ElementShortName">mem_read_mx[2:0]</obj_property>
+         <obj_property name="ObjectShortName">mem_read_mx[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_src_mx" type="logic">
+         <obj_property name="ElementShortName">alu_src_mx</obj_property>
+         <obj_property name="ObjectShortName">alu_src_mx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/branch_mx" type="logic">
+         <obj_property name="ElementShortName">branch_mx</obj_property>
+         <obj_property name="ObjectShortName">branch_mx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/jump_mx" type="logic">
+         <obj_property name="ElementShortName">jump_mx</obj_property>
+         <obj_property name="ObjectShortName">jump_mx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/reg_write_mx" type="logic">
+         <obj_property name="ElementShortName">reg_write_mx</obj_property>
+         <obj_property name="ObjectShortName">reg_write_mx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/mem_out_sel_mx" type="array">
+         <obj_property name="ElementShortName">mem_out_sel_mx[1:0]</obj_property>
+         <obj_property name="ObjectShortName">mem_out_sel_mx[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/mem_write_mx" type="array">
+         <obj_property name="ElementShortName">mem_write_mx[1:0]</obj_property>
+         <obj_property name="ObjectShortName">mem_write_mx[1:0]</obj_property>
       </wvobject>
       <wvobject fp_name="group114" type="group">
          <obj_property name="label">IMM_GEN</obj_property>
@@ -279,11 +309,6 @@
          <obj_property name="label">ALU</obj_property>
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="isExpanded"></obj_property>
-         <wvobject type="divider" fp_name="divider326">
-            <obj_property name="label">M-SPEC</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="BkColor">#DCDCDC</obj_property>
-         </wvobject>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_inst/alufn" type="array">
             <obj_property name="ElementShortName">alufn[4:0]</obj_property>
             <obj_property name="ObjectShortName">alufn[4:0]</obj_property>
@@ -291,6 +316,7 @@
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_inst/b" type="array">
             <obj_property name="ElementShortName">b[31:0]</obj_property>
             <obj_property name="ObjectShortName">b[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
          </wvobject>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_inst/cf" type="logic">
             <obj_property name="ElementShortName">cf</obj_property>
@@ -299,10 +325,12 @@
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_inst/r" type="array">
             <obj_property name="ElementShortName">r[31:0]</obj_property>
             <obj_property name="ObjectShortName">r[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
          </wvobject>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_inst/rs1" type="array">
             <obj_property name="ElementShortName">rs1[31:0]</obj_property>
             <obj_property name="ObjectShortName">rs1[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
          </wvobject>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_inst/sf" type="logic">
             <obj_property name="ElementShortName">sf</obj_property>
@@ -339,6 +367,11 @@
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_inst/op_b" type="array">
             <obj_property name="ElementShortName">op_b[31:0]</obj_property>
             <obj_property name="ObjectShortName">op_b[31:0]</obj_property>
+         </wvobject>
+         <wvobject type="divider" fp_name="divider326">
+            <obj_property name="label">M-SPEC</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="BkColor">#DCDCDC</obj_property>
          </wvobject>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/alu_inst/mul" type="array">
             <obj_property name="ElementShortName">mul[31:0]</obj_property>
@@ -400,6 +433,7 @@
       <wvobject fp_name="group149" type="group">
          <obj_property name="label">ALUSRC_MX</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/aluSrc_mux/hi_in" type="array">
             <obj_property name="ElementShortName">hi_in[31:0]</obj_property>
             <obj_property name="ObjectShortName">hi_in[31:0]</obj_property>
@@ -593,6 +627,7 @@
       <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/IF_ID_Instruction" type="array">
          <obj_property name="ElementShortName">IF_ID_Instruction[31:0]</obj_property>
          <obj_property name="ObjectShortName">IF_ID_Instruction[31:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/IF_ID_pc_current_address" type="array">
          <obj_property name="ElementShortName">IF_ID_pc_current_address[7:0]</obj_property>
@@ -603,6 +638,7 @@
    <wvobject fp_name="group848" type="group">
       <obj_property name="label">ID_EX</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/ID_EX_Instruction" type="array">
          <obj_property name="ElementShortName">ID_EX_Instruction[31:0]</obj_property>
          <obj_property name="ObjectShortName">ID_EX_Instruction[31:0]</obj_property>
@@ -621,6 +657,7 @@
          <obj_property name="ElementShortName">ID_EX_M[6:0]</obj_property>
          <obj_property name="ObjectShortName">ID_EX_M[6:0]</obj_property>
          <obj_property name="Radix">BINARYRADIX</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/ID_EX_EX" type="array">
          <obj_property name="ElementShortName">ID_EX_EX[3:0]</obj_property>
@@ -665,6 +702,7 @@
       <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/EX_MEM_r" type="array">
          <obj_property name="ElementShortName">EX_MEM_r[31:0]</obj_property>
          <obj_property name="ObjectShortName">EX_MEM_r[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/EX_MEM_rs2" type="array">
          <obj_property name="ElementShortName">EX_MEM_rs2[31:0]</obj_property>
@@ -726,65 +764,39 @@
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="BkColor">#808000</obj_property>
    </wvobject>
+   <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/forwarded_rs1" type="array">
+      <obj_property name="ElementShortName">forwarded_rs1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">forwarded_rs1[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/forwarded_rs2" type="array">
+      <obj_property name="ElementShortName">forwarded_rs2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">forwarded_rs2[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
    <wvobject fp_name="group2102" type="group">
       <obj_property name="label">FORWARD_UNIT</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/EX_MEM_rd" type="array">
-         <obj_property name="ElementShortName">EX_MEM_rd[4:0]</obj_property>
-         <obj_property name="ObjectShortName">EX_MEM_rd[4:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FFD700</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/MEM_WB_rd" type="array">
-         <obj_property name="ElementShortName">MEM_WB_rd[4:0]</obj_property>
-         <obj_property name="ObjectShortName">MEM_WB_rd[4:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FFD700</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/EX_MEM_wb" type="array">
-         <obj_property name="ElementShortName">EX_MEM_wb[1:0]</obj_property>
-         <obj_property name="ObjectShortName">EX_MEM_wb[1:0]</obj_property>
-         <obj_property name="Radix">BINARYRADIX</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-         <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/EX_MEM_wb[1]" type="logic">
-            <obj_property name="ElementShortName">[1]</obj_property>
-            <obj_property name="ObjectShortName">[1]</obj_property>
-            <obj_property name="CustomSignalColor">#FFD700</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-         </wvobject>
-         <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/EX_MEM_wb[0]" type="logic">
-            <obj_property name="ElementShortName">[0]</obj_property>
-            <obj_property name="ObjectShortName">[0]</obj_property>
-         </wvobject>
-      </wvobject>
-      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/MEM_WB_wb" type="array">
-         <obj_property name="ElementShortName">MEM_WB_wb[1:0]</obj_property>
-         <obj_property name="ObjectShortName">MEM_WB_wb[1:0]</obj_property>
-         <obj_property name="Radix">BINARYRADIX</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-         <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/MEM_WB_wb[1]" type="logic">
-            <obj_property name="ElementShortName">[1]</obj_property>
-            <obj_property name="ObjectShortName">[1]</obj_property>
-            <obj_property name="CustomSignalColor">#FFD700</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-         </wvobject>
-         <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/MEM_WB_wb[0]" type="logic">
-            <obj_property name="ElementShortName">[0]</obj_property>
-            <obj_property name="ObjectShortName">[0]</obj_property>
-         </wvobject>
-      </wvobject>
-      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/s1_sel" type="array">
-         <obj_property name="ElementShortName">s1_sel[1:0]</obj_property>
-         <obj_property name="ObjectShortName">s1_sel[1:0]</obj_property>
-         <obj_property name="Radix">BINARYRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/f1/s2_sel" type="array">
-         <obj_property name="ElementShortName">s2_sel[1:0]</obj_property>
-         <obj_property name="ObjectShortName">s2_sel[1:0]</obj_property>
-         <obj_property name="Radix">BINARYRADIX</obj_property>
-      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/hazard_detection_unit_inst/IF_ID_RegisterRs1" type="array">
+      <obj_property name="ElementShortName">IF_ID_RegisterRs1[4:0]</obj_property>
+      <obj_property name="ObjectShortName">IF_ID_RegisterRs1[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/hazard_detection_unit_inst/IF_ID_RegisterRs2" type="array">
+      <obj_property name="ElementShortName">IF_ID_RegisterRs2[4:0]</obj_property>
+      <obj_property name="ObjectShortName">IF_ID_RegisterRs2[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/hazard_detection_unit_inst/ID_EX_RegisterRd" type="array">
+      <obj_property name="ElementShortName">ID_EX_RegisterRd[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ID_EX_RegisterRd[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/hazard_detection_unit_inst/ID_EX_memRead" type="logic">
+      <obj_property name="ElementShortName">ID_EX_memRead</obj_property>
+      <obj_property name="ObjectShortName">ID_EX_memRead</obj_property>
+   </wvobject>
+   <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/hazard_detection_unit_inst/stall" type="logic">
+      <obj_property name="ElementShortName">stall</obj_property>
+      <obj_property name="ObjectShortName">stall</obj_property>
    </wvobject>
 </wave_config>

@@ -37,7 +37,6 @@ module pc(
 
 // ### Please start your Verilog code here ### 
 reg [8-1:0] pc; 
-assign load = 1'b1; 
 assign pc_current_address = pc;
 
 always @(posedge clk or posedge rst) begin 
