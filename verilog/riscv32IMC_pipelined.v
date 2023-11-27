@@ -83,6 +83,8 @@ wire             step;
 wire [32-1:0]    MEM_WB_Instruction;
 wire [3-1:0]     MEM_WB_WB; 
 
+wire [32-1:0]    EX_MEM_r; 
+
 // Instances 
 
 //IF STAGE
@@ -248,6 +250,9 @@ register #(.N(32+8+3+5+7+32+32+32)) ID_EX (
 ////////////
 //EX STAGE
 
+wire [1:0] s1_sel;
+wire [1:0] s2_sel;
+
 forwarding_unit f1 
 (   
     .ID_EX_rs1_addr(ID_EX_Instruction[19:15]), 
@@ -314,7 +319,7 @@ wire [3-1:0]       EX_MEM_WB;
 wire [32-1:0]      EX_MEM_Instruction; 
 wire [8-1:0]       EX_MEM_pc_current_address;
 wire [32-1:0]      EX_MEM_pc_plus_immediate;
-wire [32-1:0]      EX_MEM_r; 
+//wire [32-1:0]      EX_MEM_r; 
 wire [32-1:0]      EX_MEM_rs2; 
 
 wire EX_MEM_cf, EX_MEM_sf, EX_MEM_vf, EX_MEM_zf;
