@@ -1,41 +1,34 @@
-00100093
-00200113
-00300193
-00400213
-00100293
-00108c63
-0beef3b7
-00000013
-fe319ae3
-00000013
-00008067
-fe0244e3
-00fed3b7
-fedff0ef
-00225463
-00000013
-00edd3b7
-00001397
-//addi x1, x0, 1
-//addi x2, x0, 2 
-//addi x3, x0, 3
-//addi x4, x0, 4
-//addi x5, x0, 1 
+02200093
+00a00113
+022091b3
+022081b3
+0220c233
+0220e233
+0221c233
+0221e233
+fff00093
+fff00113
+022081b3
+022091b3
+0220b1b3
+0220a1b3
 //
-//.L1: beq x1, x1, .L3			
-//     lui x7, 0x0000beef    #x7 our debug register
-//     nop
-//     
-//.L2: bne x3, x3, .L1
-//     nop
-//     jalr x0, 0(ra)
-//     
-//.L3: blt x4, x0, .L1 
-//	   lui x7, 0x00000fed 	#test lui
-//      
-//.L4: jal ra, .L2
-//	   bge x4, x2, .L5
-//     nop
-//     
-//.L5: lui x7, 0x00000edd
-//	   auipc x7, 1
+//addi x1, x0, 34
+//addi x2, x0, 10
+//
+//mulh x3, x1, x2  # 34 * 10 upper = 0
+//mul	x3, x1, x2 	 # 34 * 10 lower = 340
+//
+//div x4, x1, x2	 # 34 / 10 = 3
+//rem x4, x1, x2	 # 34 % 10 = 4
+//
+//div x4, x3, x2   # 340 / 10 = 34
+//rem x4, x3, x2   # 340 % 10 = 0
+//
+//addi x1, x0, 0xffffffff # -1
+//addi x2, x0, 0xffffffff # -1
+//
+//mul x3, x1, x2    # 0x00000001 <=> 1
+//mulh x3, x1, x2   # 0x00000000 <=> 0
+//mulhu x3, x1 ,x2  # 0xfffffffe <=> -2
+//mulhsu x3, x1, x2 # 0xffffffff <=> -1

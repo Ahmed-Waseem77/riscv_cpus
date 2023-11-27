@@ -434,7 +434,7 @@ mux_4x1 #(8) targetAddr_mux(
    .A_00    (pc_next), 
    .B_01    (EX_MEM_pc_plus_immediate[8-1:0]), 
    .C_10    (EX_MEM_pc_plus_immediate[8-1:0]), //redundancy
-   .D_11    (r[8-1:0]),  //jalr
+   .D_11    (EX_MEM_r[8-1:0]),  //jalr
    .sel     (branch_sel), 
    .sel_out (pc_target_addr)
 ); 
@@ -515,7 +515,7 @@ mux_4x1 writeToReg_mux(
 
 // 
 
-assign pcSrc = branch_sel[1] ^ branch_sel[0];
+assign pcSrc = (branch_sel != 0);
 
 //CONSTANTS AND FPGA VERIFICATION OUTPUTS
 
