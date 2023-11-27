@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="395950000fs"></ZoomStartTime>
-      <ZoomEndTime time="882950001fs"></ZoomEndTime>
-      <Cursor1Time time="623950000fs"></Cursor1Time>
+      <ZoomStartTime time="506321000fs"></ZoomStartTime>
+      <ZoomEndTime time="1355321001fs"></ZoomEndTime>
+      <Cursor1Time time="647821000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="239"></NameColumnWidth>
       <ValueColumnWidth column_width="126"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="21" />
    <wave_markers>
       <marker time="978160000" label="" />
    </wave_markers>
@@ -657,7 +657,6 @@
          <obj_property name="ElementShortName">ID_EX_M[6:0]</obj_property>
          <obj_property name="ObjectShortName">ID_EX_M[6:0]</obj_property>
          <obj_property name="Radix">BINARYRADIX</obj_property>
-         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/ID_EX_EX" type="array">
          <obj_property name="ElementShortName">ID_EX_EX[3:0]</obj_property>
@@ -798,5 +797,9 @@
    <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/hazard_detection_unit_inst/stall" type="logic">
       <obj_property name="ElementShortName">stall</obj_property>
       <obj_property name="ObjectShortName">stall</obj_property>
+   </wvobject>
+   <wvobject fp_name="/riscv32IMC_pipelined_tb/DUT/pcSrc" type="logic">
+      <obj_property name="ElementShortName">pcSrc</obj_property>
+      <obj_property name="ObjectShortName">pcSrc</obj_property>
    </wvobject>
 </wave_config>

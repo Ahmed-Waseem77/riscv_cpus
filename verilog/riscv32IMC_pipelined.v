@@ -78,6 +78,7 @@ wire             zf;
 wire  [32-1:0]   Instruction_in;
 wire             step;
 wire             stall;
+wire             pcSrc;
 
 //pipeline internal declarations
 
@@ -129,9 +130,10 @@ wire [32+8-1:0] IF_ID_data_out;
 wire [32-1:0]   IF_ID_Instruction; 
 wire [8-1:0]    IF_ID_pc_current_address;
 
+
 assign IF_ID_data_in = 
 {
-   Instruction,
+   pcSrc ?  32'h00000033 : Instruction,
    pc_current_address
 };
 
@@ -179,7 +181,7 @@ cu cu_inst(
 
 //hazard detection mux
 wire [3+1+1+1+2+3+2+1:0] temp1;
-assign temp1 = (stall) ? 0 : {alu_op, alu_src, branch, jump, mem_out_sel, mem_read, mem_write, reg_write}; 
+assign temp1 = (stall || pcSrc) ? 0 : {alu_op, alu_src, branch, jump, mem_out_sel, mem_read, mem_write, reg_write}; 
 
 wire  [3-1:0]    alu_op_mx, mem_read_mx;
 wire             alu_src_mx, branch_mx, jump_mx, reg_write_mx;
@@ -331,6 +333,14 @@ aluCu aluCu_inst(
    .alufn       (alufn)
 ); 
 
+wire [3+1+1+1+2+2:0] temp2;
+
+assign temp2 = (pcSrc) ? 0 : {ID_EX_WB, ID_EX_M}; 
+
+wire [7-1:0] ID_EX_WB_mx;
+wire [3-1:0] ID_EX_M_mx;
+
+assign {ID_EX_WB_mx, ID_EX_M_mx} = temp2;
 
 /////////////
 //EX_MEM PIPE
@@ -351,9 +361,9 @@ wire [32-1:0]      EX_MEM_rs2;
 
 wire EX_MEM_cf, EX_MEM_sf, EX_MEM_vf, EX_MEM_zf;
 
-assign EX_MEM_WB_in = ID_EX_WB;
+assign EX_MEM_WB_in = ID_EX_WB_mx;
 
-assign EX_MEM_M_in = ID_EX_M;
+assign EX_MEM_M_in = ID_EX_M_mx;
 
 assign EX_MEM_data_in = 
 {
@@ -489,7 +499,9 @@ mux_4x1 writeToReg_mux(
    .sel_out (write_data_reg_file)
 ); 
 
+// 
 
+assign pcSrc = branch_sel[1] * branch_sel[0];
 
 //CONSTANTS AND FPGA VERIFICATION OUTPUTS
 
