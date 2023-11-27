@@ -25,10 +25,10 @@
 `timescale 1ns/1ps
 
 module forwarding_unit(
-input       [31:0] ID_EX_rs1, 
-input       [31:0] ID_EX_rs2, 
-input       [31:0] EX_MEM_rd,
-input       [31:0] MEM_WB_rd, 
+input       [5-1:0] ID_EX_rs1, 
+input       [5-1:0] ID_EX_rs2, 
+input       [5-1:0] EX_MEM_rd,
+input       [5-1:0] MEM_WB_rd, 
 input       [1:0] EX_MEM_wb, 
 input       [1:0] MEM_WB_wb,
 output reg  [1:0] s1_sel, 
